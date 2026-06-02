@@ -19,7 +19,7 @@ all_wares = {
 "price": 349.0,
 "number_in_stock": 3,
 "ratings": [5.0, 5.0, 4.5, 5.0, 5.0, 5.0],
-"description": "A high speed overprices HDMI cable!",
+"description": "A high speed overpriced HDMI cable!",
 }
 }
 test_ware = {
@@ -67,5 +67,6 @@ for ware in in_stock.values():
     print_ware_information(ware)
     print()
 #Oppgave 4
-def is_number_of_ware_in_stock(all_wares):
-    
+def is_number_of_ware_in_stock(ware, number_of_ware):
+    return number_of_ware <= ware['number_in_stock']
+
