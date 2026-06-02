@@ -31,7 +31,7 @@ test_ware = {
 }
 def is_in_stock(ware):
    return ware['number_in_stock'] >= 1
-#Oppgave 1
+#Task 1
 class product:
     def __init__(self, name, price, number_in_stock, description, score):
         self.name = name
@@ -48,14 +48,14 @@ def print_ware_information(ware):
 
 
 
-#Oppgave 2
+#Task 2
 def calculate_average_ware_rating(ware) :
     try:
         ratings=ware['ratings']
         return round(sum(ratings) / len(ratings), 1)
     except ZeroDivisionError:
         return 0
-#Oppgave 3
+#Task 3
 def get_all_wares_in_stock(all_wares):
     in_stock = {}
     for ware_key, ware in all_wares.items(): #ware_key = "amd_processor", "ps5" etc.
@@ -66,7 +66,7 @@ in_stock = get_all_wares_in_stock(all_wares)
 for ware in in_stock.values():
     print_ware_information(ware)
     print()
-#Oppgave 4
+#Task 4
 def is_number_of_ware_in_stock(ware, number_of_ware):
     return number_of_ware <= ware['number_in_stock']
 

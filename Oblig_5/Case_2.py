@@ -1,7 +1,7 @@
-#Oppgace.1
+#Oblig 5 case 2
 from datetime import date
 
-
+#Task 1
 class car:
     def __init__(self, brand,model, price, year, month, new, km):
         self.brand = brand
