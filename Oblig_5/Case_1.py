@@ -24,7 +24,7 @@ all_wares = {
 }
 test_ware = {
     "name": "AMD Ryzen 9 5900X",
-    "price": 5590.0
+    "price": 5590.0,
     "number_in_stock": 50,
     "ratings": [4.5, 4.0, 5.0, 5.0, 4.5, 3.0],
     "description": "All the cores and threads you'll need!"
@@ -42,7 +42,7 @@ class product:
 
 def print_ware_information(ware):
     print(f" Name: {ware['name']}")
-    print(f" Price: {ware['price']}")
+    print(f" Price: {ware['price']},-")
     print(f" Number in stock: {ware['number_in_stock']}")
     print(f" Description: {ware['description']}")
 
@@ -66,3 +66,6 @@ in_stock = get_all_wares_in_stock(all_wares)
 for ware in in_stock.values():
     print_ware_information(ware)
     print()
+#Oppgave 4
+def is_number_of_ware_in_stock(all_wares):
+    
