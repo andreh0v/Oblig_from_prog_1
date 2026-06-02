@@ -67,6 +67,24 @@ for ware in in_stock.values():
     print_ware_information(ware)
     print()
 #Task 4
+#Checks if a set product is in stock
 def is_number_of_ware_in_stock(ware, number_of_ware):
     return number_of_ware <= ware['number_in_stock']
 
+#Task 5
+shopping_cart = {}
+#It will add the coresponding amount that the user wants if in stock. If not in stock it will give a message to the user.
+def add_number_of_ware_to_shopping_cart(ware_key,ware, shopping_cart, number_of_ware = 1):
+    if not is_in_stock(ware):
+        print(f"{ware_key} not in stock!")
+    elif is_number_of_ware_in_stock(ware, number_of_ware):
+         shopping_cart[ware_key] = number_of_ware
+         print(f"{number_of_ware} of {ware['name']} added to cart!")
+    else:
+        shopping_cart[ware_key] = ware['number_in_stock']
+        print(f"Only {ware['number_in_stock']} of {ware['name']} were in stock. These have been added!")
+
+add_number_of_ware_to_shopping_cart("amd_processor", all_wares["amd_processor"], shopping_cart, 1)
+add_number_of_ware_to_shopping_cart("playstation_5", all_wares["playstation_5"], shopping_cart, 2)
+add_number_of_ware_to_shopping_cart("hdmi_cable", all_wares["hdmi_cable"], shopping_cart, 4)
+print(shopping_cart)
