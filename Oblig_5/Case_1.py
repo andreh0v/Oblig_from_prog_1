@@ -1,26 +1,26 @@
-#Case 1 Oblig 5
+# Case 1 Oblig 5
 all_wares = {
-"amd_processor": {
-"name": "AMD Ryzen 9 5900X Processor",
-"price": 5590.0,
-"number_in_stock": 50,
-"ratings": [4.5, 4.0, 5.0, 5.0, 4.5, 3.0],
-"description": "All the cores and threads you'll need!",
-},
-"playstation_5": {
-"name": "PlayStation 5",
-"price": 5999.0,
-"number_in_stock": 0,
-"ratings": [5.0, 5.0, 4.5, 2.0, 5.0, 4.5, 4.0],
-"description": "Next generation console, never in stock!",
-},
-"hdmi_cable": {
-"name": "Belkin Ultra High Speed HDMI Cable - 2m",
-"price": 349.0,
-"number_in_stock": 3,
-"ratings": [5.0, 5.0, 4.5, 5.0, 5.0, 5.0],
-"description": "A high speed overpriced HDMI cable!",
-}
+    "amd_processor": {
+        "name": "AMD Ryzen 9 5900X Processor",
+        "price": 5590.0,
+        "number_in_stock": 50,
+        "ratings": [4.5, 4.0, 5.0, 5.0, 4.5, 3.0],
+        "description": "All the cores and threads you'll need!",
+    },
+    "playstation_5": {
+        "name": "PlayStation 5",
+        "price": 5999.0,
+        "number_in_stock": 0,
+        "ratings": [5.0, 5.0, 4.5, 2.0, 5.0, 4.5, 4.0],
+        "description": "Next generation console, never in stock!",
+    },
+    "hdmi_cable": {
+        "name": "Belkin Ultra High Speed HDMI Cable - 2m",
+        "price": 349.0,
+        "number_in_stock": 3,
+        "ratings": [5.0, 5.0, 4.5, 5.0, 5.0, 5.0],
+        "description": "A high speed overpriced HDMI cable!",
+    }
 }
 test_ware = {
     "name": "AMD Ryzen 9 5900X",
@@ -29,9 +29,13 @@ test_ware = {
     "ratings": [4.5, 4.0, 5.0, 5.0, 4.5, 3.0],
     "description": "All the cores and threads you'll need!"
 }
+
+
 def is_in_stock(ware):
-   return ware['number_in_stock'] >= 1
-#Task 1
+    return ware['number_in_stock'] >= 1
+
+
+# Task 1
 class product:
     def __init__(self, name, price, number_in_stock, description, score):
         self.name = name
@@ -40,6 +44,7 @@ class product:
         self.description = description
         self.score = score
 
+
 def print_ware_information(ware):
     print(f" Name: {ware['name']}")
     print(f" Price: {ware['price']},-")
@@ -47,44 +52,114 @@ def print_ware_information(ware):
     print(f" Description: {ware['description']}")
 
 
-
-#Task 2
-def calculate_average_ware_rating(ware) :
+# Task 2
+def calculate_average_ware_rating(ware):
     try:
-        ratings=ware['ratings']
+        ratings = ware['ratings']
         return round(sum(ratings) / len(ratings), 1)
     except ZeroDivisionError:
         return 0
-#Task 3
+
+
+# Task 3
 def get_all_wares_in_stock(all_wares):
     in_stock = {}
-    for ware_key, ware in all_wares.items(): #ware_key = "amd_processor", "ps5" etc.
+    for ware_key, ware in all_wares.items():  # ware_key = "amd_processor", "ps5" etc.
         if is_in_stock(ware):
             in_stock[ware_key] = ware
     return in_stock
+
+
 in_stock = get_all_wares_in_stock(all_wares)
 for ware in in_stock.values():
     print_ware_information(ware)
     print()
-#Task 4
-#Checks if a set product is in stock
+
+
+# Task 4
+# Checks if a set product is in stock
 def is_number_of_ware_in_stock(ware, number_of_ware):
     return number_of_ware <= ware['number_in_stock']
 
-#Task 5
+
+# Task 5
 shopping_cart = {}
-#It will add the coresponding amount that the user wants if in stock. If not in stock it will give a message to the user.
-def add_number_of_ware_to_shopping_cart(ware_key,ware, shopping_cart, number_of_ware = 1):
+
+
+# It will add the coresponding amount that the user wants if in stock. If not in stock it will give a message to the user.
+def add_number_of_ware_to_shopping_cart(ware_key, ware, shopping_cart, number_of_ware=1):
     if not is_in_stock(ware):
         print(f"{ware_key} not in stock!")
     elif is_number_of_ware_in_stock(ware, number_of_ware):
-         shopping_cart[ware_key] = number_of_ware
-         print(f"{number_of_ware} of {ware['name']} added to cart!")
+        shopping_cart[ware_key] = number_of_ware
+        print(f"{number_of_ware} of {ware['name']} added to cart!")
     else:
         shopping_cart[ware_key] = ware['number_in_stock']
         print(f"Only {ware['number_in_stock']} of {ware['name']} were in stock. These have been added!")
 
+
+# Task 6
+# A function that will return the price with VAT in a certain shopping cart
+def calculate_shopping_cart_price(shopping_cart, all_wares, tax=0.25):
+    total = 0
+    for ware_key, quantity in shopping_cart.items():
+        total += all_wares[ware_key]['price'] * quantity
+    return round(total * (1 + tax), 2)
+
+
 add_number_of_ware_to_shopping_cart("amd_processor", all_wares["amd_processor"], shopping_cart, 1)
-add_number_of_ware_to_shopping_cart("playstation_5", all_wares["playstation_5"], shopping_cart, 2)
-add_number_of_ware_to_shopping_cart("hdmi_cable", all_wares["hdmi_cable"], shopping_cart, 4)
-print(shopping_cart)
+add_number_of_ware_to_shopping_cart("hdmi_cable", all_wares["hdmi_cable"], shopping_cart, 2)
+
+print(f"Cart total with VAT: {calculate_shopping_cart_price(shopping_cart, all_wares)} kr")
+
+
+# Task 7
+# Wallet function for transactions
+class Wallet:
+    def __init__(self, amount):
+        self.amount = amount
+
+    def get_amount(self):
+        return self.amount
+
+    def subtract_amount(self, amount):
+        self.amount -= amount
+
+
+# A boolean calc. checking if you can afford shopping vart
+def can_afford_shopping_cart(price, wallet):
+    return wallet.get_amount() >= price
+
+
+wallet = Wallet(10000)
+price = calculate_shopping_cart_price(shopping_cart, all_wares)
+print(can_afford_shopping_cart(price, wallet))  # This function checks if the buyer has enough funds for the product
+
+print(type(can_afford_shopping_cart(price, wallet)))
+
+
+# Task 8 bonus
+def buy_shopping_cart(shopping_cart, all_wares, wallet):
+    for ware_key in list(shopping_cart.keys()):
+        current_stock = all_wares[ware_key]['number_in_stock']
+        if current_stock == 0:  # Removes the good from the cart entirely
+            shopping_cart.pop(ware_key)
+        elif shopping_cart[ware_key] > current_stock:
+            shopping_cart[ware_key] = current_stock
+    # step 2 - price calculation
+    price = calculate_shopping_cart_price(shopping_cart, all_wares)
+    # step 3 - can afford
+    if can_afford_shopping_cart(price, wallet):
+        #If yes completing the purchase
+        wallet.subtract_amount(price)
+        for ware_key, quantity in shopping_cart.items():
+            print(f" Purchasing {quantity} of {all_wares[ware_key]['name']}")
+            all_wares[ware_key]['number_in_stock'] -= quantity
+        print(f"Total price paid: {price} kr")
+        shopping_cart.clear()
+        print("Purchase successfull!")
+        print(f" Remaining balance: {wallet.get_amount()} kr")
+    #If the customer does not have funds, no purchase no funds message
+    else:
+        print("Not enough funds!")
+buy_shopping_cart(shopping_cart, all_wares, wallet)
